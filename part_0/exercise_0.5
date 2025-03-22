@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant browser as Browser
+    participant server as Server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/spa/notes (Payload: { "content": "test1", "date": "2025-03-22T17:17:55.846Z" })
+    activate server
+    Note over server: Server processes the new note data
+    server-->>browser: Status 201 Created (Response: { "message": "note created" })
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: [{ "content": "test1", "date": "2025-03-22T17:17:55.846Z" }, ... ]
+    deactivate server
